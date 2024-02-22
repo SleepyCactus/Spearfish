@@ -1,6 +1,7 @@
 using GridSystem;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GridManager : MonoBehaviour
@@ -16,12 +17,17 @@ public class GridManager : MonoBehaviour
     private void OnEnable()
     {
         m_grid = new Grid(m_xSize, m_ySize);
-        m_walker = new Walker(m_grid.cells[0,0]);
+        m_walker = new Walker(m_grid.cells[Mathf.FloorToInt(m_xSize/2), Mathf.FloorToInt(m_ySize / 2)]);
     }
-
-    private void FixedUpdate()
+    public void Start()
     {
+        StartCoroutine(MoveTick());
+    }
+    IEnumerator MoveTick()
+    {
+        yield return new WaitForSeconds(0.1f);
         m_walker.Move();
+        StartCoroutine(MoveTick());
     }
 
     private void OnDrawGizmos()
