@@ -16,12 +16,14 @@ namespace GridSystem
             {Vector2.left, null}
         };
         private string m_cellContent;
+        public Color cellDebugColour;
         #endregion
 
         public Cell(Vector2 _pos)
         {
             m_position = _pos;
             m_cellContent = "Empty";
+            cellDebugColour = Color.grey;
         }
 
         #region Private Functions
