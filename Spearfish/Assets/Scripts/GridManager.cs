@@ -10,15 +10,19 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int m_xSize;
     [SerializeField] private int m_ySize;
     private Grid m_grid;
-    private Walker m_walker;
+    private Walker[] m_walkers = new Walker[4];
     #endregion
 
     #region Private Functions
     private void OnEnable()
     {
         m_grid = new Grid(m_xSize, m_ySize);
-        m_walker = new Walker(m_grid.cells[Mathf.FloorToInt(m_xSize/2), Mathf.FloorToInt(m_ySize / 2)]);
+        for (int i = 0; i < m_walkers.Length; i++)
+        {
+            m_walkers[i] = new Walker(m_grid.cells[Mathf.FloorToInt(m_xSize / 2), Mathf.FloorToInt(m_ySize / 2)]);
+        }
     }
+        
     public void Start()
     {
         StartCoroutine(MoveTick());
@@ -26,7 +30,10 @@ public class GridManager : MonoBehaviour
     IEnumerator MoveTick()
     {
         yield return new WaitForSeconds(0.1f);
-        m_walker.Move();
+        for (int i = 0; i < m_walkers.Length; i++)
+        {
+            m_walkers[i].Move();
+        }
         StartCoroutine(MoveTick());
     }
 
@@ -46,7 +53,11 @@ public class GridManager : MonoBehaviour
             }
         }
         Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(new Vector3(m_walker.position.x, 0, m_walker.position.y), 0.5f);
+        for (int i = 0; i < m_walkers.Length; i++)
+        {
+            Gizmos.DrawSphere(new Vector3(m_walkers[i].position.x, 0, m_walkers[i].position.y), 0.5f);
+        }
+        
 
     }
 
