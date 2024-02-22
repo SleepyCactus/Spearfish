@@ -9,12 +9,14 @@ public class GridManager : MonoBehaviour
     [SerializeField] private int m_xSize;
     [SerializeField] private int m_ySize;
     private Grid m_grid;
+    private Walker m_walker;
     #endregion
 
     #region Private Functions
     private void OnEnable()
     {
         m_grid = new Grid(m_xSize, m_ySize);
+        m_walker = new Walker(new Vector2(0, 0));
     }
 
     private void OnDrawGizmos()
@@ -32,6 +34,8 @@ public class GridManager : MonoBehaviour
                 Gizmos.DrawCube(new Vector3(iX,0,iY),Vector3.one/2);
             }
         }
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(new Vector3(m_walker.position.x, 0, m_walker.position.y), 0.5f);
 
     }
 
