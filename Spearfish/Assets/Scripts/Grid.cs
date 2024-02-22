@@ -42,9 +42,9 @@ public class Grid
             for (int iY = 0; iY < m_ySize; iY++)
             {
                 Cell up    = (iY +1 < m_ySize) ? m_cells[iX, iY +1] : null;
-                Cell right = (iX +1 < m_ySize) ? m_cells[iX +1, iY] : null;
-                Cell down  = (iY -1 > 0)       ? m_cells[iX, iY -1] : null;
-                Cell left  = (iX -1 > 0)       ? m_cells[iX -1, iY] : null;
+                Cell right = (iX +1 < m_xSize) ? m_cells[iX +1, iY] : null;
+                Cell down  = (iY -1 >= 0)       ? m_cells[iX, iY -1] : null;
+                Cell left  = (iX -1 >= 0)       ? m_cells[iX -1, iY] : null;
 
                 m_cells[iX, iY].SetNeighbours(up, right, down, left);
             }
