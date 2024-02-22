@@ -1,12 +1,31 @@
+using GridSystem;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Walker
 {
     public Vector2 position;
-    public Walker(Vector2 _pos)
+    public Cell currentCell;
+    private Vector2[] m_directions = { new Vector2(0, 1), new Vector2(0, -1), new Vector2(1, 0), new Vector2(-1, 0) };
+    public Walker(Cell _cell)
     {
-        position = _pos;
+        currentCell = _cell;
+        position = _cell.position;
     }
+
+
+    public void Move()
+    {
+        Vector2 output = Vector2.zero;
+        Vector2 selectedDirection = m_directions[Random.Range(0, m_directions.Length)];
+        if (currentCell.GetNeighbour(selectedDirection) != null)
+        {
+            currentCell = currentCell.GetNeighbour(selectedDirection);
+            position = currentCell.position;
+        }
+    }
+
+
 }

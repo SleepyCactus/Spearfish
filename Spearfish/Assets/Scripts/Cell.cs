@@ -7,7 +7,7 @@ namespace GridSystem
     public class Cell
     {
         #region Variables
-        private Vector2 m_position;
+        public Vector2 position;
         private Dictionary<Vector2, Cell> m_neighbours = new Dictionary<Vector2, Cell>()
         {
             {Vector2.up, null},
@@ -21,7 +21,7 @@ namespace GridSystem
 
         public Cell(Vector2 _pos)
         {
-            m_position = _pos;
+            position = _pos;
             m_cellContent = "Empty";
             cellDebugColour = Color.grey;
         }
@@ -56,7 +56,7 @@ namespace GridSystem
                         + "-Down "  + m_neighbours[Vector2.down] + "\n"
                         + "-Left "  + m_neighbours[Vector2.left] + "\n"
                     + "Position:"
-                        + m_position + "\n"
+                        + position + "\n"
                     + "Content:"
                         + m_cellContent 
                     + "\n "

@@ -16,7 +16,12 @@ public class GridManager : MonoBehaviour
     private void OnEnable()
     {
         m_grid = new Grid(m_xSize, m_ySize);
-        m_walker = new Walker(new Vector2(0, 0));
+        m_walker = new Walker(m_grid.cells[0,0]);
+    }
+
+    private void FixedUpdate()
+    {
+        m_walker.Move();
     }
 
     private void OnDrawGizmos()
