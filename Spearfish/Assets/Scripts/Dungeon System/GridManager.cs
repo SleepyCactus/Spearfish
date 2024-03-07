@@ -9,17 +9,20 @@ public class GridManager : MonoBehaviour
     #region Variables
     [SerializeField] private int m_xSize;
     [SerializeField] private int m_ySize;
+    [SerializeField] private int m_walkerCount;
+    [SerializeField] int m_maxWalkerSteps;
     private Grid m_grid;
-    private Walker[] m_walkers = new Walker[4];
+    private List<Walker> m_walkers = new List<Walker>();
     #endregion
 
     #region Private Functions
     private void OnEnable()
     {
+        m_walkers.Clear();
         m_grid = new Grid(m_xSize, m_ySize);
-        for (int i = 0; i < m_walkers.Length; i++)
+        for (int i = 0; i < m_walkerCount; i++)
         {
-            m_walkers[i] = new Walker(m_grid.cells[Mathf.FloorToInt(m_xSize / 2), Mathf.FloorToInt(m_ySize / 2)]);
+            m_walkers.Add(new Walker(m_grid.cells[Mathf.FloorToInt(m_xSize / 2), Mathf.FloorToInt(m_ySize / 2)],m_maxWalkerSteps));
         }
     }
         
@@ -30,7 +33,7 @@ public class GridManager : MonoBehaviour
     IEnumerator MoveTick()
     {
         yield return new WaitForSeconds(0.1f);
-        for (int i = 0; i < m_walkers.Length; i++)
+        for (int i = 0; i < m_walkers.Count; i++)
         {
             m_walkers[i].Move();
         }
@@ -53,7 +56,7 @@ public class GridManager : MonoBehaviour
             }
         }
         Gizmos.color = Color.blue;
-        for (int i = 0; i < m_walkers.Length; i++)
+        for (int i = 0; i < m_walkers.Count; i++)
         {
             Gizmos.DrawSphere(new Vector3(m_walkers[i].position.x, 0, m_walkers[i].position.y), 0.5f);
         }
