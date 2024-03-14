@@ -20,23 +20,43 @@ public class Walker
         m_maxSteps = _max;
     }
 
-
+    public float GetDistanceFrom(Vector2 _from)
+    {
+        float dist = 0;
+        dist = Vector2.Distance(_from, position);
+        return dist;
+    }
     public void Move()
     {
         m_steps++;
-        if(m_steps >= m_maxSteps)
+        if (m_steps >= m_maxSteps)
         {
             dead = true;
             return;
         }
-        Vector2 selectedDirection = m_directions[Random.Range(0, m_directions.Length)];
-        if (currentCell.GetNeighbour(selectedDirection) != null)
+
+        if (currentCell != null)
         {
-            currentCell = currentCell.GetNeighbour(selectedDirection);
-            currentCell.cellDebugColour = Color.black;
-            position = currentCell.position;
+            Cell c = currentCell.GetRandomWeightedNeighbour();
+            if (c != null)
+            {
+                currentCell = c;
+                currentCell.cellDebugColour = Color.black;
+                position = currentCell.position;
+
+            }
+
+
+            /*
+            Vector2 selectedDirection = m_directions[Random.Range(0, m_directions.Length)];
+            if (currentCell.GetNeighbour(selectedDirection) != null)
+            {
+                currentCell = currentCell.GetNeighbour(selectedDirection);
+                currentCell.cellDebugColour = Color.black;
+                position = currentCell.position;
+            }
+            */
         }
     }
-
 
 }

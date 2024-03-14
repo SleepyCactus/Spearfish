@@ -154,8 +154,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_xSize: 25
   m_ySize: 25
-  m_walkerCount: 3
-  m_maxWalkerSteps: 25
+  m_walkerCount: 5
+  m_maxWalkerSteps: 50
+  m_stepTime: 0.01
+  m_drawWalkers: 0
 --- !u!4 &27186943
 Transform:
   m_ObjectHideFlags: 0
