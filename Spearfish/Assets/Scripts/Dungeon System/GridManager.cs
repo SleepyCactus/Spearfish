@@ -25,22 +25,7 @@ public class GridManager : MonoBehaviour
     #endregion
 
     #region Private Functions
-    private void OnEnable()
-    {
-        m_drawWalkers = true;
-        m_walkers.Clear();
-        m_grid = new Grid(m_xSize, m_ySize);
-        origin = new Vector2(Mathf.FloorToInt(m_xSize / 2), Mathf.FloorToInt(m_ySize / 2));
-        for (int i = 0; i < m_walkerCount; i++)
-        {
-            m_walkers.Add(new Walker(m_grid.cells[(int)origin.x,(int)origin.y],m_maxWalkerSteps));
-        }
-    }
         
-    public void Start()
-    {
-        StartCoroutine(MoveTick());
-    }
     IEnumerator MoveTick()
     {
         yield return new WaitForSeconds(m_stepTime);
@@ -144,5 +129,18 @@ public class GridManager : MonoBehaviour
     #endregion
 
     #region Public Functions
+
+    public void GenerateLevel()
+    {
+        m_drawWalkers = true;
+        m_walkers.Clear();
+        m_grid = new Grid(m_xSize, m_ySize);
+        origin = new Vector2(Mathf.FloorToInt(m_xSize / 2), Mathf.FloorToInt(m_ySize / 2));
+        for (int i = 0; i < m_walkerCount; i++)
+        {
+            m_walkers.Add(new Walker(m_grid.cells[(int)origin.x, (int)origin.y], m_maxWalkerSteps));
+        }
+        StartCoroutine(MoveTick());
+    }
     #endregion
 }

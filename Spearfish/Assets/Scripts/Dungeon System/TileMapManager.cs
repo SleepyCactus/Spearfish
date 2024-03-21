@@ -57,7 +57,8 @@ public class TileMapManager : MonoBehaviour
             for (int iY = 0; iY < _grid.m_ySize; iY++)
             {
                 Cell currentCell = _grid.cells[iX, iY];
-                tile.sprite = _grid.cells[iX, iY].cellContent.Sprite;
+                tile.sprite = currentCell.cellContent.Sprite;
+                tile.colliderType = currentCell.cellContent.ColliderType;
                 m_tileMap.SetTile(new Vector3Int(iX, iY, 0), tile);
             }
         }
@@ -71,4 +72,5 @@ public class CustomTile
     public string Name;
     public Sprite Sprite;
     public Color Colour;
+    public Tile.ColliderType ColliderType;
 }
