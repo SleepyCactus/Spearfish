@@ -62,6 +62,8 @@ public class GridManager : MonoBehaviour
             m_drawWalkers = false;
             AddStartTile();
             AddEndTile();
+
+            TileMapManager.Inst.DisplayGrid(m_grid);
         }
         
     }
@@ -85,7 +87,7 @@ public class GridManager : MonoBehaviour
         }
 
         m_startCell = m_walkers[iLargest].currentCell;
-        m_startCell.cellDebugColour = Color.green;
+        m_startCell.cellContent = TileMapManager.Inst.GetTile("Start");
 
     }
     private void AddEndTile()
@@ -107,7 +109,7 @@ public class GridManager : MonoBehaviour
             }
         }
 
-        m_walkers[iLargest].currentCell.cellDebugColour = Color.red;
+        m_walkers[iLargest].currentCell.cellContent = TileMapManager.Inst.GetTile("End");
 
     }
     private void OnDrawGizmos()
@@ -121,8 +123,9 @@ public class GridManager : MonoBehaviour
         {
             for (int iY = 0; iY < m_ySize; iY++)
             {
-                Gizmos.color = m_grid.cells[iX,iY].cellDebugColour * ((1-m_grid.cells[iX, iY].heat)+0.5f);
-                Gizmos.DrawCube(new Vector3(iX,0,iY),Vector3.one/2);
+                Cell currentCell = m_grid.cells[iX, iY];
+                Gizmos.color = currentCell.cellContent.Colour * ((1-currentCell.heat)+0.5f);
+                Gizmos.DrawCube(new Vector3(iX,0,iY),Vector3.one);
             }
         }
         if(m_drawWalkers)

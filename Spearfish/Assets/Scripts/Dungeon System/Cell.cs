@@ -17,14 +17,14 @@ namespace GridSystem
             {Vector2.down, null},
             {Vector2.left, null}
         };
-        private string m_cellContent;
+        public CustomTile cellContent;
         public Color cellDebugColour;
         #endregion
 
         public Cell(Vector2 _pos)
         {
             position = _pos;
-            m_cellContent = "Empty";
+            cellContent = TileMapManager.Inst.GetTile("Wall");
             cellDebugColour = Color.magenta;
         }
 
@@ -33,10 +33,6 @@ namespace GridSystem
         #endregion
 
         #region Public Functions
-        public string GetCellContent()
-        {
-            return m_cellContent;
-        }
         public Cell GetNeighbour(Vector2 _direction)
         { 
             return m_neighbours[_direction];
@@ -119,7 +115,7 @@ namespace GridSystem
                     + "Position:"
                         + position + "\n"
                     + "Content:"
-                        + m_cellContent 
+                        + cellContent 
                     + "\n "
                     );
         }

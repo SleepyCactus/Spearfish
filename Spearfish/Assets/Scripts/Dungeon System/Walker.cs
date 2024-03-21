@@ -41,7 +41,7 @@ public class Walker
             if (c != null)
             {
                 currentCell = c;
-                currentCell.cellDebugColour = Color.black;
+                currentCell.cellContent = TileMapManager.Inst.GetTile("Floor");
                 position = currentCell.position;
 
             }
